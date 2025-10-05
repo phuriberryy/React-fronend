@@ -52,7 +52,30 @@ const data = [
       name: 'Maxi yellow Skirt for woman',
       imageURL: 'skirt.jpg',
       type: 'High-waist skirt, Causal skirt'
+    },
+    {
+      id: 10,
+      name: 'king',
+      imageURL: 'king.jpeg',
+      type: 'kingpmyking'
+    }
+    ,
+    {
+      id: 11,
+      name: 'king',
+      imageURL: 'king.jpeg',
+      type: 'kingpmyking'
+    } ,
+    {
+      id: 12,
+      name: 'king',
+      imageURL: 'king.jpeg',
+      type: 'kingpmyking'
     }
   ];
+  
+
+
+
   
   module.exports = data;
