@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 function AddForm({ addProduct }) {
@@ -6,13 +6,15 @@ function AddForm({ addProduct }) {
   const [imageURL, setImageURL] = useState('');
   const [type, setType] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addProduct({ name, type, imageURL });
+  };
+
   return (
-    <div>
+    <Fragment>
       <h1>Add Product</h1>
-      <form id="create-form" onSubmit={(e)=>{
-        e.preventDefault();
-        addProduct({ name, type, imageURL });
-      }}>
+      <form id="create-form" onSubmit={handleSubmit}>
         <div className="input-group">
           <label htmlFor="name">Name</label>
           <input
@@ -24,7 +26,7 @@ function AddForm({ addProduct }) {
           />
         </div>
 
-        <div className=" input-group">
+        <div className="input-group">
           <label htmlFor="imageURL">Image URL</label>
           <input
             name="imageURL"
@@ -35,7 +37,7 @@ function AddForm({ addProduct }) {
           />
         </div>
 
-        <div className=" input-group">
+        <div className="input-group">
           <label htmlFor="type">Type</label>
           <input
             name="type"
@@ -48,12 +50,12 @@ function AddForm({ addProduct }) {
 
         <button type="submit">Add product</button>
       </form>
-    </div>
+    </Fragment>
   );
 }
 
 AddForm.propTypes = {
-  addProduct: PropTypes.func.isRequired
+  addProduct: PropTypes.func.isRequired,
 };
 
 export default AddForm;
