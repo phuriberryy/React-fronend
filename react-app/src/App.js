@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import Navbar from './features/Navbar';
@@ -8,20 +9,22 @@ import Home from './features/Home';
 import GlobalStyle from './features/GlobalStyle';
 import AddForm from './features/Product/AddForm';
 import UpdateForm from './features/Product/UpdateForm';
+import { fetchProducts } from './features/Product/actions';
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const products = useSelector((state) => state.products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getProducts() {
-      const products = await axios.get(
-       'https://68e9fe40f1eeb3f856e5b14f.mockapi.io/api/vi/product/product'
+      const { data } = await axios.get(
+         'https://68e9fe40f1eeb3f856e5b14f.mockapi.io/api/vi/product/product'
       );
-      setProducts(products.data);
+      dispatch(fetchProducts(data));
     }
 
     getProducts();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

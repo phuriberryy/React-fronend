@@ -1,20 +1,26 @@
-import React, { useState, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-function AddForm({ addProduct }) {
+import { addProduct } from './actions';
+
+function AddForm() {
   const [name, setName] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [type, setType] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addProduct({ name, type, imageURL });
-  };
+  function onSubmit(event) {
+    event.preventDefault();
+    dispatch(addProduct({ name, type, imageURL }));
+    navigate('/');
+  }
 
   return (
-    <Fragment>
+    <>
       <h1>Add Product</h1>
-      <form id="create-form" onSubmit={handleSubmit}>
+      <form id="create-form" onSubmit={onSubmit}>
         <div className="input-group">
           <label htmlFor="name">Name</label>
           <input
@@ -26,7 +32,7 @@ function AddForm({ addProduct }) {
           />
         </div>
 
-        <div className="input-group">
+        <div className=" input-group">
           <label htmlFor="imageURL">Image URL</label>
           <input
             name="imageURL"
@@ -37,7 +43,7 @@ function AddForm({ addProduct }) {
           />
         </div>
 
-        <div className="input-group">
+        <div className=" input-group">
           <label htmlFor="type">Type</label>
           <input
             name="type"
@@ -50,12 +56,8 @@ function AddForm({ addProduct }) {
 
         <button type="submit">Add product</button>
       </form>
-    </Fragment>
+    </>
   );
 }
-
-AddForm.propTypes = {
-  addProduct: PropTypes.func.isRequired,
-};
 
 export default AddForm;
